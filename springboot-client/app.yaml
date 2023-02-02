@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-client
+  labels:
+    app: spring-boot-client
+    prometheus.io/scrape: "true"
+spec:
+  type: ClusterIP
+  selector:
+    app: spring-boot-client
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: http
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: spring-boot-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot-client
+  template:
+    metadata:
+      labels:
+        app: spring-boot-client
+        version: v1
+    spec:
+      containers:
+        - name: spring-boot-client
+          image: nrt.ocir.io/orasejapan/shukawam/springboot-client:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: api
+              containerPort: 8080
+          env:
+            - name: cowweb.baseUrl
+              value: http://cowweb-helidon:8080
+            - name: JAVA_TOOL_OPTIONS
+              value: "-XX:MaxRAMPercentage=50.0"
+          resources:
+            requests:
+              cpu: 0.1
+              memory: 500M
+            limits:
+              cpu: 0.2
+              memory: 500M
+      imagePullSecrets:
+        - name: ocir-secret
