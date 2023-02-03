@@ -2,11 +2,10 @@ import http from 'k6/http';
 import { sleep } from 'k6';
 
 export const options = {
-    vus: 50,
-    duration: '30s'
+    vus: 150,
+    duration: '15s'
 }
 
 export default function () {
-    http.get('http://helidon-nima-client.shukawam.me/client/say');
-    sleep(1)
+    const res = http.get('http://helidon-nima-client.shukawam.me/client/say');
 }
