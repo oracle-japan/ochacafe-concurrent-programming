@@ -1,18 +1,18 @@
 package com.oracle.jp;
 
-import io.helidon.nima.webclient.http1.Http1Client;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse.BodyHandlers;
+import java.util.concurrent.ExecutionException;
+
+import io.helidon.config.Config;
 import io.helidon.nima.webserver.http.HttpRules;
 import io.helidon.nima.webserver.http.HttpService;
 import io.helidon.nima.webserver.http.ServerRequest;
 import io.helidon.nima.webserver.http.ServerResponse;
 
-public class ClientService implements HttpService{
-
-    private static Http1Client client;
-
-    static void client(Http1Client client) {
-        ClientService.client = client;
-    }
+public class ClientService implements HttpService {
 
     @Override
     public void routing(HttpRules rules) {
@@ -20,8 +20,16 @@ public class ClientService implements HttpService{
     }
 
     private void say(ServerRequest req, ServerResponse res) {
-        String result = client.get().uri("/cowsay/say").request(String.class);
-        res.send(result);
+        Config config = Config.create();
+        String baseUrl = config.get("cowweb.baseUrl").asString().get();
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder(URI.create(baseUrl + "/client/say")).build();
+        try {
+            var response = httpClient.sendAsync(request, BodyHandlers.ofString()).get().body();
+            res.send(response);
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException();
+        }
     }
-    
+
 }

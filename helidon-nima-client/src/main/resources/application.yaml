@@ -3,4 +3,4 @@ server:
   host: 0.0.0.0
 
 cowweb:
-  baseUrl: http://cowweb-helidon:8080
+  baseUrl: http://localhost:8080

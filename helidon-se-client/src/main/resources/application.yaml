@@ -5,4 +5,5 @@ server:
 app:
   greeting: "Hello"
 
-
+cowweb:
+  baseUrl: http://localhost:8080
