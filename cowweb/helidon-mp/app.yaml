@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cowweb-helidon
+  labels:
+    app: cowweb-helidon
+    prometheus.io/scrape: "true"
+spec:
+  type: ClusterIP
+  selector:
+    app: cowweb-helidon
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: http
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: cowweb-helidon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cowweb-helidon
+  template:
+    metadata:
+      labels:
+        app: cowweb-helidon
+        version: v1
+    spec:
+      containers:
+        - name: cowweb-helidon
+          image: nrt.ocir.io/orasejapan/shukawam/cowweb-helidon:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: api
+              containerPort: 8080
+      imagePullSecrets:
+        - name: ocir-secret
