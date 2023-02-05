@@ -2,15 +2,15 @@
 
 ![badge](https://github.com/oracle-japan/cowweb-helidon/actions/workflows/maven.yml/badge.svg)
 
-Cowsay Web API.
+Cowsay Web API implemented by Helidon MP running on Helidon Nima.
 
 ## Build and run
 
-With JDK17+
+With JDK19+
 
 ```bash
 ./mvnw package
-java -jar target/cowweb-helidon.jar
+java --enable-preview -jar target/cowweb-helidon.jar
 ```
 
 ## Exercise the application
