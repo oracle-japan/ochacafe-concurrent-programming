@@ -11,21 +11,21 @@ import java.util.stream.IntStream;
 
 import com.oracle.jp.demo.utils.FizzBuzzCallableTask;
 
-public class ThreadPoolMain {
+public class DemoThreadPool {
     public static void main(String[] args) {
-        ThreadPoolMain main = new ThreadPoolMain();
+        DemoThreadPool main = new DemoThreadPool();
 
         // 1 スレッドを持つスレッドプールを作成
         // ExecutorService singleThreadPool = Executors.newSingleThreadExecutor();
         // main.exec(singleThreadPool);
 
         // 3 スレッドを持つスレッドプールを作成
-        // ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
-        // main.exec(fixedThreadPool);
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
+        main.exec(fixedThreadPool);
 
         // 新しいスレッドの作成が必要であれば作成、必要なければプール済みのスレッドを再利用
-        ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-        main.exec(cachedThreadPool);
+        // ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+        // main.exec(cachedThreadPool);
     }
 
     private void exec(ExecutorService threadPool) {

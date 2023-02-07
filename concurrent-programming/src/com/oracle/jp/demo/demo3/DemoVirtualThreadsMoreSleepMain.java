@@ -9,8 +9,8 @@ import java.util.stream.IntStream;
 import com.oracle.jp.demo.utils.FizzBuzzTask;
 import com.oracle.jp.demo.utils.FizzBuzzUtils;
 
-public class VirtualThreadMoreSleepMain {
-  private static final Logger logger = Logger.getLogger(VirtualThreadMoreSleepMain.class.getName());
+public class DemoVirtualThreadsMoreSleepMain {
+  private static final Logger logger = Logger.getLogger(DemoVirtualThreadsMoreSleepMain.class.getName());
 
   public static void main(String[] args) {
     long start = System.currentTimeMillis();

@@ -1,15 +1,10 @@
 package com.oracle.jp.demo.demo1;
 
-public class ThreadMain {
+public class DemoThread {
 
     // public static void main(String[] args) {
     //     System.out.println(String.format("[%s]: %s", Thread.currentThread().getName(), "Hello world!"));
-    //     Thread thread = new Thread() {
-    //         @Override
-    //         public void run() {
-    //             System.out.println(String.format("[%s]: %s", Thread.currentThread().getName(), "Hello world!"));
-    //         }
-    //     };
+    //     Thread thread = new Thread(new DemoRunnableTask());
     //     thread.start();
     // }
 
