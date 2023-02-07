@@ -16,12 +16,12 @@ public class VirtualThreadMain {
     long start = System.currentTimeMillis();
 
     // Demo 1
-    ThreadFactory virtualThreadFactory = Thread.ofVirtual().name("virtual-thread-", 1).factory();
-    createThreadPerExecFizzBuzz(virtualThreadFactory);
-
-    // Demo 2
     // ThreadFactory platformThreadFactory = Thread.ofPlatform().name("platform-thread-", 1).factory();
     // createThreadPerExecFizzBuzz(platformThreadFactory);
+
+    // Demo 2
+    ThreadFactory virtualThreadFactory = Thread.ofVirtual().name("virtual-thread-", 1).factory();
+    createThreadPerExecFizzBuzz(virtualThreadFactory);
 
     long end = System.currentTimeMillis();
     logger.info("Execution time: " + Long.toString(end - start) + "[ms]");
@@ -30,7 +30,7 @@ public class VirtualThreadMain {
   public static void createThreadPerExecFizzBuzz(ThreadFactory factory) {
     FizzBuzzTask task = new FizzBuzzTask();
     try (ExecutorService exector = Executors.newThreadPerTaskExecutor(factory)) {
-      IntStream.rangeClosed(1, 1_000_000).forEach(i -> {
+      IntStream.rangeClosed(1, 10_000).forEach(i -> {
         exector.submit(() -> {
           task.execWithSleep(i, 1_000);
           FizzBuzzUtils.log(i, task.exec(i));

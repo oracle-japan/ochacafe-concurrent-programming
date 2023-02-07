@@ -7,12 +7,3 @@ server:
 metrics:
   rest-request:
     enabled: false
-
-security:
-  enabled: false
-
-# Cowweb config
-cowweb:
-  message: Moo!
-  cowfile: default
-  ping-message: "I'm working...\n"

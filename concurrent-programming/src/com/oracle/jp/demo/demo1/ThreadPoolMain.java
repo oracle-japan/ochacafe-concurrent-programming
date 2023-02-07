@@ -20,12 +20,12 @@ public class ThreadPoolMain {
         // main.exec(singleThreadPool);
 
         // 3 スレッドを持つスレッドプールを作成
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
-        main.exec(fixedThreadPool);
+        // ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
+        // main.exec(fixedThreadPool);
 
         // 新しいスレッドの作成が必要であれば作成、必要なければプール済みのスレッドを再利用
-        // ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-        // main.exec(cachedThreadPool);
+        ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+        main.exec(cachedThreadPool);
     }
 
     private void exec(ExecutorService threadPool) {
@@ -33,7 +33,6 @@ public class ThreadPoolMain {
         IntStream.rangeClosed(1, 100).forEach(i -> {
             submitTaskList.add(threadPool.submit(new FizzBuzzCallableTask(i)));
         });
-
         submitTaskList.forEach(task -> {
             try {
                 if (task.get() == false) {
@@ -43,7 +42,6 @@ public class ThreadPoolMain {
                 throw new RuntimeException("Error in Thread.");
             }
         });
-
         threadPool.shutdown();
     }
 }
