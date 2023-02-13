@@ -1,4 +1,4 @@
-package com.oracle.jp.jep;
+package com.oracle.jp.study;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
