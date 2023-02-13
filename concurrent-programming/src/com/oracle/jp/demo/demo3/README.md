@@ -14,7 +14,7 @@ jcmd -l
 プロファイリング情報を収集します。
 
 ```bash
-jcmd 587908 JFR.start duration=1m filename=demo-recording.jfr
+jcmd 587908 JFR.start duration=1m filename=demo.jfr
 ```
 
 ダンプしたプロファイリングデータ JDK Mission Control に取り込んで参照してください。
